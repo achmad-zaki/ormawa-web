@@ -33,9 +33,9 @@ const Sidebar = ({children}) => {
               </Link>
             </li>
             <li className='flex items-center'>
-              <Link href={'/about'} className={`transition duration-300 text-md w-full flex items-center ${show ? 'justify-center' : ''} gap-3 px-4 py-3 hover:bg-[#5932EA] hover:text-white text-black rounded-lg`}>
+              <Link href={'/proker'} className={`transition duration-300 text-md w-full flex items-center ${show ? 'justify-center' : ''} gap-3 px-4 py-3 hover:bg-[#5932EA] hover:text-white text-black rounded-lg`}>
                   <span className="logo"><FiBox className='text-lg'/></span>
-                  <span className={`${show ? 'hidden' : ''}`}>About</span>
+                  <span className={`${show ? 'hidden' : ''}`}>Program Kerja</span>
               </Link>
             </li>
             <li className='flex items-center'>
