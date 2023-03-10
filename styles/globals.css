@@ -7,4 +7,8 @@
     .active {
         @apply bg-[#5932EA] text-white rounded-lg
     }
+
+    .btn-primary {
+        @apply py-3 px-5 bg-[#5932EA] text-white font-bold rounded-md hover:bg-[#4020b4] transition duration-300
+    }
 }

@@ -11,6 +11,7 @@ const Header = () => {
             src={Avatar}
             width={35}
             height={35}
+            alt='avatar'
           />
         </button>
       </div>

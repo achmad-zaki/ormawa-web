@@ -6,9 +6,11 @@ import { FiAirplay } from 'react-icons/fi'
 import { FiX } from 'react-icons/fi'
 import { FiPhone } from 'react-icons/fi'
 import Logo from '../public/logo/logo-company.svg'
+import { useRouter } from 'next/router'
 
 const Sidebar = ({children}) => {
   const [show, setShow] = useState(false)
+  const router = useRouter()
   return (
   <>
     <div className="h-screen flex">
@@ -27,13 +29,13 @@ const Sidebar = ({children}) => {
           </Link>
           <ul className='flex flex-col gap-5'>
             <li className='flex items-center'>
-              <Link href={'/'} className={`transition duration-300 text-md w-full flex items-center ${show ? 'justify-center' : ''} gap-3 px-4 py-3 active`}>
+              <Link href={'/'} className={`text-md w-full flex items-center ${show ? 'justify-center' : ''} gap-3 px-4 py-3 ${router.pathname === '/' ? 'active' : ''}`}>
                   <span className="logo"><FiAirplay className='text-lg'/></span>
                   <span className={`${show ? 'hidden' : ''}`}>Dashboard</span>
               </Link>
             </li>
             <li className='flex items-center'>
-              <Link href={'/proker'} className={`transition duration-300 text-md w-full flex items-center ${show ? 'justify-center' : ''} gap-3 px-4 py-3 hover:bg-[#5932EA] hover:text-white text-black rounded-lg`}>
+              <Link href={'/proker'} className={`text-md w-full flex items-center ${show ? 'justify-center' : ''} gap-3 px-4 py-3 hover:bg-[#5932EA] hover:text-white rounded-lg ${router.pathname === '/proker' ? 'active' : ''}`}>
                   <span className="logo"><FiBox className='text-lg'/></span>
                   <span className={`${show ? 'hidden' : ''}`}>Program Kerja</span>
               </Link>
