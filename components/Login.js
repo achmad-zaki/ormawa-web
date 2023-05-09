@@ -1,10 +1,44 @@
 import React from 'react'
-import Image from 'next/image'
 import rectangle1 from '@/public/rectangle-1.svg'
+import Image from 'next/image'
 import rectangle2 from '@/public/rectangle-2.svg'
 import rectangle3 from '@/public/rectangle-3.svg'
+import { signIn } from "next-auth/react"
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 
-const Login = () => {
+export default function Login() {
+    const router = useRouter();
+
+    const [field, setField] = useState({})
+
+    // function setValue(e) {
+    //     const target = e.target;
+    //     const name = target.name;
+    //     const value = target.value;
+
+    //     setField({
+    //         ...field,
+    //         [name] : value
+    //     })
+    //     console.log(field)
+    // }
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const result = await signIn('credentials', {
+            redirect: false,
+            username: e.target.username.value,
+            password: e.target.password.value,
+        });
+        console.log(result);
+        if (result.ok) {
+            router.replace('/');
+            return;
+        }
+        alert('Hayo cek en seng bener');
+    };
   return (
     <div className='h-screen flex items-center justify-center'>
         <div className="relative basis-full h-screen bg-gradient-to-t from-[#6026AB] to-[#CC8644] hidden md:block">
@@ -30,14 +64,14 @@ const Login = () => {
                     <h1 className='text-4xl font-bold'>Login</h1>
                     <p className='text-sm mt-3 max-w-sm text-slate-500'>Selamat Datang 👋 Tolong login terlebih dahulu</p>
                 </div>
-                <form action="/" className='mt-10'>
+                <form onSubmit={onSubmit} className='mt-10'>
                     <div>
                         <label htmlFor="username" className='block mb-2 text-gray-600'>Username</label>
-                        <input type='text' className='w-full rounded-md border border-gray-400'/>
+                        <input type='text' id='username' name='username' className='w-full rounded-md border border-gray-400' />
                     </div>
                     <div className='mt-5'>
                         <label htmlFor="password" className='block mb-2 text-gray-600'>Password</label>
-                        <input type='password' className='w-full rounded-md border border-gray-400'/>
+                        <input type='password' id='password' name='password' className='w-full rounded-md border border-gray-400' />
                     </div>
                     <div className="mt-5">
                         <input type='checkbox'/>
@@ -51,4 +85,3 @@ const Login = () => {
   )
 }
 
-export default Login

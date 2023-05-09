@@ -5,10 +5,14 @@ import { QueryClientProvider, QueryClient } from 'react-query'
 import { store } from '@/redux/store';
 import { Provider } from 'react-redux'
 import Head from 'next/head'
+import { SessionProvider } from 'next-auth/react';
+import { useState } from 'react';
 
 const queryClient = new QueryClient();
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
+
+
   return (
     <>
       <Head>
@@ -18,12 +22,18 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className='font-poppins'>
-        <QueryClientProvider client={queryClient}>
-          <Provider store={store}>
-            <Component {...pageProps}/>
-          </Provider>
-        </QueryClientProvider>
+
+          <QueryClientProvider client={queryClient}>
+            <SessionProvider session={session}>
+              <Provider store={store}>
+                <Component {...pageProps}/>
+              </Provider>
+            </SessionProvider>
+          </QueryClientProvider>
+
       </div>
     </>
   )
 }
+
+

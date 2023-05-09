@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id         Int       @id @default(autoincrement())
+  role       String?   @db.VarChar(255)
+  username   String?   @unique @db.VarChar(255)
+  password   String?   @db.VarChar(255)
+}
+
+model Proker {
+  id               Int       @id @default(autoincrement())
+  nama_proker      String?   @db.VarChar(255)
+  tgl_pelaksanaan  DateTime  @db.Date
+  indikator        String?   @db.LongText
+  target           String    @db.LongText 
+  total_anggaran   Int       @default(0)
+  catatan          String?   @db.LongText
+  status           String    @db.VarChar(50)
+}
