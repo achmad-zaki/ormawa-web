@@ -1,4 +1,5 @@
-import { prisma } from "../../../libs/prisma.libs";
+import { prisma } from "@/config/db";
+
 
 export default function handler(req, res) {
   const { role, username, password, id } = req.body;

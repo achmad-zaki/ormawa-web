@@ -1,8 +1,12 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+import { prisma } from "@/config/db";
+
+
 
 export default NextAuth({
+  secret: process.env.jWT_SECRET,
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -21,7 +25,10 @@ export default NextAuth({
         const isCorrectPassword = await bcrypt.compare(password, user.password);
 
         if (isCorrectPassword) {
+          // req.session.set('user', { id: user.id });
+          // await req.session.save();
           return user;
+
         } else {
           throw new Error("Incorrect password");
         }
@@ -29,17 +36,23 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    async jwt(token, user) {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.uid;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
       if (user) {
         token.uid = user.id;
       }
       return token;
     },
-    async session(session, token) {
-      session.user.id = token.uid;
-      return session;
-    },
   },
+  session: {
+    strategy: 'jwt',
+  },
+
   database: process.env.DATABASE_URL,
 });
 

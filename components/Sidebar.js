@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import { FiBox, FiMenu } from 'react-icons/fi'
 import { FiAirplay } from 'react-icons/fi'
 import { FiX } from 'react-icons/fi'
-import { FiPhone } from 'react-icons/fi'
-import Logo from '../public/logo/logo-company.svg'
+import { FiActivity } from 'react-icons/fi'
+import Logo from '../public/logo/a.png'
 import { useRouter } from 'next/router'
 
 const Sidebar = ({children}) => {
@@ -25,7 +25,7 @@ const Sidebar = ({children}) => {
         <div className="flex flex-col p-4 gap-3">
           <Link href='/' className={`mb-10 flex items-center gap-3 ${show ? 'justify-center' : ''}`}>
             <Image src={Logo} width={40} height={40} alt='logo' />
-            <h3 className={`${show ? 'hidden' : ''} font-bold text-lg`}>Sidebars</h3>
+            <h3 className={`${show ? 'hidden' : ''} font-bold text-lg`}>Ormawa Web</h3>
           </Link>
           <ul className='flex flex-col gap-5'>
             <li className='flex items-center'>
@@ -41,9 +41,9 @@ const Sidebar = ({children}) => {
               </Link>
             </li>
             <li className='flex items-center'>
-              <Link href={'/'} className={`transition duration-300 text-md w-full flex items-center ${show ? 'justify-center' : ''} gap-3 px-4 py-3 hover:bg-[#5932EA] hover:text-white text-black rounded-lg`}>
-                  <span className="logo"><FiPhone className='text-lg'/></span>
-                  <span className={`${show ? 'hidden' : ''}`}>Contact</span>
+              <Link href={'/report'} className={`transition duration-300 text-md w-full flex items-center ${show ? 'justify-center' : ''} gap-3 px-4 py-3 hover:bg-[#5932EA] hover:text-white rounded-lg ${router.pathname === '/report' ? 'active' : ''}`}>
+                  <span className="logo"><FiActivity className='text-lg'/></span>
+                  <span className={`${show ? 'hidden' : ''}`}>Laporan</span>
               </Link>
             </li>
           </ul>

@@ -9,6 +9,7 @@ import { SessionProvider } from 'next-auth/react';
 import { useState } from 'react';
 
 const queryClient = new QueryClient();
+const auth = require('@/middleware/auth')
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
 

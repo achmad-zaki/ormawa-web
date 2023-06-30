@@ -1,28 +1,30 @@
-import Login from '@/components/Login'
-import React from 'react'
-import { useEffect } from 'react';
+import Login from '@/components/Login';
+import React, { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import Router from 'next/router';
-// import Layout from '@/layout/layout';
+import { useRouter } from 'next/router';
 
+export default function LoginPage() {
+  const { data: session } = useSession();
+  const router = useRouter();
 
+  useEffect(() => {
+    const { pathname } = router;
+    const nextRoute = localStorage.getItem('nextRoute');
 
-export default function login() {
-  // const { data: session } = useSession();
+    if (pathname === '/login') {
+      if (session) {
+        if (nextRoute) {
+          router.replace(nextRoute);
+        } else {
+          router.replace('/');
+        }
+      }
+    }
+  }, [session, router]);
 
-  // useEffect(() => {
-  //   const {pathname} = Router
-  //     if (session !== null){
-  //       Router.replace('/');
-  //       return;
-  //     } 
-
-  // }, [session]);
   return (
-    // <Layout>
-      <div>
-        <Login/>
-      </div>
-    // </Layout> 
-  )
+    <div>
+      <Login />
+    </div>
+  );
 }

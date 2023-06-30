@@ -25,7 +25,7 @@ return (
 
         {
             pages.map(page => {
-                return <div key={pages.id}>
+                return <div key={page}>
                             <a href="#" key={page} aria-current="page" className={`relative inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50  ${page == currentPage ? 'active focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus:text-white' : ''}`} onClick={() => onPageChange(page)}>
                                 {page}  
                             </a>
